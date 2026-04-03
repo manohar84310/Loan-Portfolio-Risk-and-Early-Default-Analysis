@@ -1,0 +1,132 @@
+Objective
+
+The objective of this project was to:
+
+Analyze loan customer records
+Identify customers with high default risk
+Detect early warning signs of delayed EMI payments
+Monitor loan portfolio performance
+Visualize loan risk trends using dashboards
+Dataset Description
+
+A simulated loan dataset was used containing approximately 8,000 customer records.
+
+The dataset includes the following fields:
+
+Customer_ID – Unique ID assigned to each customer
+Income – Monthly income of customer
+Loan_Amount – Total loan amount taken
+Loan_Type – Type of loan (Home, Personal, Auto)
+EMI_Amount – Monthly EMI payment
+Delay_Days – Number of days EMI payment was delayed
+Default_Flag – Indicates default status (1 = Default, 0 = No Default)
+Data Cleaning
+
+Before performing analysis, the dataset was cleaned to ensure data quality.
+
+The following steps were performed:
+
+Removed duplicate customer records
+Checked for missing or invalid values
+Converted numeric fields into proper data types
+Standardized loan type names
+Filtered records with invalid loan amounts
+
+Example Python operations performed:
+
+df = df.drop_duplicates()
+
+df['Income'] = df['Income'].astype(int)
+
+df['Loan_Type'] = df['Loan_Type'].str.strip()
+
+df = df[df['Loan_Amount'] > 0]
+Data Analysis
+
+Several analysis steps were performed to identify loan risk patterns.
+
+Loan Distribution Analysis
+
+Loan types were analyzed to understand the distribution of loans across customers.
+
+Example SQL Query:
+
+SELECT Loan_Type,
+COUNT(*) AS Total_Customers
+FROM Loan_Data
+GROUP BY Loan_Type;
+
+This helped identify the most commonly used loan types.
+
+Default Risk Identification
+
+Customers with delayed EMI payments were identified as potential high-risk customers.
+
+Example SQL Query:
+
+SELECT *
+FROM Loan_Data
+WHERE Delay_Days > 30;
+
+This helped detect customers who showed early warning signs of default.
+
+Loan-to-Income Ratio Analysis
+
+Loan affordability was analyzed using income and loan amount values.
+
+Example Python:
+
+df['Loan_to_Income_Ratio'] = df['Loan_Amount'] / df['Income']
+
+This helped identify customers who had higher financial burden.
+
+Default Rate Calculation
+
+Default percentage was calculated to measure overall loan risk.
+
+Example SQL:
+
+SELECT
+COUNT(CASE WHEN Default_Flag = 1 THEN 1 END) * 100.0
+/ COUNT(*) AS Default_Rate
+FROM Loan_Data;
+Power BI Dashboard
+
+A Power BI dashboard was created to visualize loan portfolio performance.
+
+The dashboard includes:
+
+Total Loan Customers
+Total Default Customers
+Default Rate (%)
+Loan Type Distribution
+Default by Loan Type
+Delay Days Analysis
+Income vs Loan Amount Analysis
+High-Risk Customer Identification
+
+These visualizations helped in understanding loan behavior and identifying risky customers.
+
+Key Insights
+
+From the analysis, the following insights were identified:
+
+Personal loans showed a higher default rate compared to other loan types
+Customers with Delay Days greater than 30 were more likely to default
+Customers with lower income and higher loan amounts had higher risk
+High loan-to-income ratio indicated possible financial stress
+Loan distribution showed majority customers under home loan category
+Business Impact
+
+This project helps financial institutions to:
+
+Identify risky customers early
+Reduce loan default rates
+Improve loan approval decisions
+Monitor loan portfolio risk
+Take preventive actions for delayed payments
+Tools Used
+Python (Pandas) – Data cleaning and analysis
+SQL – Data querying and aggregation
+Power BI – Dashboard visualization
+CSV Dataset – Data storage
